@@ -5,10 +5,10 @@ import "react-h5-audio-player/lib/styles.css";
 
 interface MusicPlayerProps {
   selectedSong: SongData | null;
-  onSongEnd: (id: number) => void;
+  onSongEnd?: (id: number) => void;
 }
 
-const MusicPlayer: React.FC<MusicPlayerProps> = ({
+const GlobalMusicPlayer: React.FC<MusicPlayerProps> = ({
   selectedSong,
   onSongEnd,
 }) => {
@@ -53,7 +53,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
               autoPlay={true}
               onEnded={() => {
                 if (selectedSong) {
-                  onSongEnd(selectedSong._id);
+                  onSongEnd && onSongEnd(selectedSong._id);
                 } else console.log("Song ended. No more songs to play.");
               }}
               style={selectedSong ? { width: "100%" } : { opacity: 0.1 }}
@@ -65,4 +65,4 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
   );
 };
 
-export default MusicPlayer;
+export default GlobalMusicPlayer;
